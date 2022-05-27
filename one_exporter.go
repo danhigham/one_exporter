@@ -32,9 +32,10 @@ func newConfig(fileName string, logger log.Logger) (config, error) {
 	viper.SetDefault("path", "/metrics")
 	viper.SetDefault("port", 9621)
 
-
 	viper.SetConfigType("yaml")
+	viper.AutomaticEnv()
 	viper.AddConfigPath(".")
+	viper.SetEnvPrefix("ONE")
 
 	if fileName != "" {
 		level.Info(logger).Log("msg", "using provided configuration file", "file", fileName)
@@ -77,8 +78,8 @@ func main() {
 	logger := log.NewLogfmtLogger(log.NewSyncWriter(os.Stderr))
 	logger = log.With(logger, "ts", log.DefaultTimestampUTC, "caller", log.DefaultCaller)
 
-	cfgFile  := kingpin.Flag("config", "config file for one_exporter").Short('c').String()
-	logLevel := kingpin.Flag("loglevel", "the log level to output. options are error, info or debug. defaults to info").Short('l').Default("info").String()
+	cfgFile := kingpin.Flag("config", "config file for one_exporter").Short('c').String()
+	logLevel := kingpin.Flag("loglevel", "the log level to output. options are error, info or debug. defaults to info").Short('l').Default("debug").String()
 
 	kingpin.Version(Version)
 	kingpin.Parse()

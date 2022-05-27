@@ -1,20 +1,5 @@
 ---
-
-# credentials to access OpenNebula
-user: oneadmin
-password: oneadmin
-
-# OpenNebula frontend endpoint
-# an empty endpoint will default to http://localhost:2633/RPC2
-# endpoint:
-
-# frequency to retrieve metrics in seconds. defaults to 60.
-# interval: 60
-
-# host and port to run the exporter on
+# endpoint and password are read from the environment
+user: metrics
 host: 0.0.0.0 
 port: 9621
-
-# exporter uri to publish on. defaults to /metrics
-# path: /metrics
-
